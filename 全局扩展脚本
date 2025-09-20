@@ -1,0 +1,15 @@
+function main(config, profileName) {
+  config["geox-url"] = {
+    geoip: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.dat",
+    geosite: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat",
+    mmdb: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip.metadb",
+    asn: "https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/GeoLite2-ASN.mmdb"
+  };
+  // 2. 启用自动更新
+  config["geo-auto-update"] = true;
+  config["geo-update-interval"] = 12;
+  // 3. 启用 geodata 模式
+  config["geodata-mode"] = true;
+  
+  return config;
+}
