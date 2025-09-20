@@ -1,0 +1,54 @@
+dns:
+  enable: true
+  listen: '127.0.0.1:53'
+  enhanced-mode: 'fake-ip'
+  fake-ip-range: '198.18.0.1/16'
+  fake-ip-filter-mode: 'blacklist'
+  prefer-h3: false
+  respect-rules: true
+  use-hosts: true
+  use-system-hosts: false
+  ipv6: true
+  fake-ip-filter:
+    - '*.lan'
+    - '*.local'
+    - '*.arpa'
+    - 'time.*.com'
+    - 'ntp.*.com'
+  default-nameserver:
+    - '119.29.29.29'
+    - '2402:4e00::'
+    - '223.5.5.5'
+    - '2400:3200::1'
+  nameserver:
+    - 'https://doh.pub/dns-query'
+    - 'https://dns.alidns.com/dns-query'
+  direct-nameserver-follow-policy: true
+  fallback-filter:
+    geoip: true
+    geoip-code: 'CN'
+    ipcidr:
+      - '240.0.0.0/4'
+    domain:
+      - '+.google.com'
+      - '+.facebook.com'
+      - '+.youtube.com'
+  fallback:
+    - 'https://dns.quad9.net/dns-query'
+    - 'https://dns.nextdns.io/337785'
+  proxy-server-nameserver:
+    - 'https://dns.quad9.net/dns-query'
+    - 'https://dns.nextdns.io/337785'
+    - 'https://doh.pub/dns-query'
+  direct-nameserver:
+    - 'https://doh.pub/dns-query'
+    - 'https://dns.alidns.com/dns-query'
+  nameserver-policy:
+    +.arpa:
+      - '119.29.29.29'
+    geosite:cn:
+      - 'https://doh.pub/dns-query'
+      - 'https://dns.alidns.com/dns-query'
+    geosite:geolocation-!cn:
+      - 'https://dns.nextdns.io/337785'
+      - 'https://dns.quad9.net/dns-query'
