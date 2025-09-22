@@ -1,12 +1,12 @@
 profile:
   store-selected: true      # ← 记住用户在 GUI 手动选的节点，重启不丢
 
-mode: rule                  # ← 运行模式：按规则分流（rule）/全局（global）/直连（direct）
+# mode: rule                  # ← 运行模式：按规则分流（rule）/全局（global）/直连（direct）
 ipv6: true                  # ← 允许解析并转发 IPv6 流量；无 IPv6 时可改 false
-tcp-concurrent: true        # ← 对同一目标并行尝试所有节点握手，取最快建链，降低延迟
+# tcp-concurrent: true        # ← 对同一目标并行尝试所有节点握手，取最快建链，降低延迟
 unified-delay: true         # ← 统一不同协议节点的延迟计算方式，避免误判高延迟
 allow-lan: false            # ← 禁止其他局域网设备连入 Clash；需共享时改 true
-bind-address: "0.0.0.0"           # ← 监听所有本地网卡地址（0.0.0.0 同义）
+# bind-address: "0.0.0.0"           # ← 监听所有本地网卡地址（0.0.0.0 同义）
 max-worker: 10                    # 限制最大工作线程数（防止资源过载）
 timeout: 30                       # 设置代理超时时间（单位：秒，避免卡顿）
 
@@ -23,19 +23,23 @@ sniffer:
 rules:
   - RULE-SET,all-adblock,REJECT
   - RULE-SET,win-spy,REJECT
-  - RULE-SET,win-extra,REJECT
   - RULE-SET,reject,REJECT
+  - GEOIP,LAN,DIRECT
+  - GEOIP,private,DIRECT,no-resolve
   - RULE-SET,private,DIRECT
+
+  - GEOIP,CN,DIRECT
+  - GEOSITE,CN,DIRECT
+  - RULE-SET,apple-cn,DIRECT
+  - GEOSITE,microsoft@cn,DIRECT
+  - RULE-SET,microsoft-cn,DIRECT
   - RULE-SET,lancidr,DIRECT
-  - GEOIP,google,Proxies
+  - RULE-SET,category-ai-!cn,Proxies
+  - RULE-SET,gfw,Proxies
+  - GEOSITE,google,Proxies
   - RULE-SET,direct-list,DIRECT
   - RULE-SET,geolocation-cn,DIRECT
   - RULE-SET,all-cnip,DIRECT
-  - RULE-SET,apple-cn,DIRECT
-  - RULE-SET,microsoft-cn,DIRECT
-  - GEOIP,CN,DIRECT
-  - RULE-SET,category-ai-!cn,Proxies
-  - RULE-SET,gfw,Proxies
   - RULE-SET,all-proxy,Proxies
   - MATCH,Proxies
 
