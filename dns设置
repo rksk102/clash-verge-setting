@@ -18,8 +18,8 @@ dns:
   default-nameserver:
     - '119.29.29.29'
     - '2402:4e00::'
-    - '223.5.5.5'
-    - '2400:3200::1'
+    - '194.242.2.3'
+    - '2a07:e340::3'
   nameserver:
     - 'https://doh.pub/dns-query'
     - 'https://dns.alidns.com/dns-query'
